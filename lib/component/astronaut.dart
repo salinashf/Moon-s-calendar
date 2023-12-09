@@ -12,7 +12,7 @@ class Astronaut extends StatefulWidget {
 
 class _AstronautState extends State<Astronaut> {
   bool _animating = false;
-  Timer _timer;
+  late Timer _timer;
   Map<String, int> _astAnimeTime = {
     "flash": 1,
     "float": 30,
@@ -22,11 +22,11 @@ class _AstronautState extends State<Astronaut> {
 
   void startTimer() {
     const oneSec = const Duration(seconds: 1);
-    int _start = _astAnimeTime[widget.astAnime];
+    int _start = _astAnimeTime[widget.astAnime]!;
     _timer = new Timer.periodic(
       oneSec,
       (Timer timer) => setState(() {
-        if (_start < 1) {
+        if (_start! < 1) {
           _animating = false;
           timer.cancel();
         } else

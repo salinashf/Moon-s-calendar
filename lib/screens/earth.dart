@@ -50,7 +50,7 @@ class EarthPage extends StatelessWidget {
                   onTap: () {
                     tapCount++;
                     if (tapCount >= 3) {
-                      Scaffold.of(context).showSnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
                               'Stop tapping. Earthquake detected from Earth!'),
@@ -72,7 +72,7 @@ class EarthPage extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: FlatButton(
+              child: MaterialButton(
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -159,5 +159,5 @@ class KeyValueModel {
   String key;
   String value;
 
-  KeyValueModel({this.key, this.value});
+  KeyValueModel({required this.key,required this.value});
 }

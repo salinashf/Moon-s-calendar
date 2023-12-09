@@ -3,7 +3,7 @@ import 'package:flare_flutter/flare.dart';
 import 'package:flare_flutter/flare_controller.dart';
 
 class AnimationControls extends FlareController {
-  ActorAnimation _moonAnimation;
+  late ActorAnimation _moonAnimation;
 
   double _moonPhase = 0.00;
   double _currentPhase = 0;
@@ -15,7 +15,7 @@ class AnimationControls extends FlareController {
     // Artboard and moonPhase refers to the elements defined in Rive.
     // check if it is the right artboard and get the animation you need
     if (artboard.name.compareTo("Artboard") == 0) {
-      _moonAnimation = artboard.getAnimation('moonPhase');
+      _moonAnimation = artboard.getAnimation('moonPhase')!;
     }
   }
 

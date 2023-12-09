@@ -33,8 +33,8 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
   DateTime _date = new DateTime.now();
   String brNav = "Today's Moon";
 
-  AnimationControls _flareController;
-  AnimationController _flutterController;
+  late AnimationControls _flareController;
+  late AnimationController _flutterController;
 
   int currentMoonPhase = 0;
   int selectedMoon = 29;
@@ -43,9 +43,9 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
   bool showAst = false;
   bool showClock = true;
   DateTime newDate = DateTime.now();
-  double diff;
-  double _scale;
-  String astAnime;
+  late double diff;
+  late double _scale;
+  late String astAnime;
 
   @override
   void initState() {
@@ -73,11 +73,11 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
   }
 
   Future<Null> _selectDate(BuildContext context) async {
-    newDate = await showDatePicker(
+    newDate = (await showDatePicker(
         context: context,
         initialDate: _date,
         firstDate: new DateTime(1970, 1, 7),
-        lastDate: new DateTime(2200));
+        lastDate: new DateTime(2200)))!;
 
     if (newDate != null && newDate != _date) {
       int moonDay =
@@ -224,7 +224,7 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            FlatButton(
+            TextButton(
               child: new Text("How's Moon in: "),
               onPressed: () {
                 showDialog(
@@ -234,7 +234,7 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
                 );
               },
             ),
-            FlatButton(
+            TextButton(
               child: new Text(brNav),
               onPressed: () {
                 _selectDate(context);

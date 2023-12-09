@@ -107,10 +107,10 @@ class _SettingDialogState extends State<SettingDialog> {
                         trailing: DropdownButton<String>(
                           value: astAnime,
                           onChanged: showAst
-                              ? (String value) {
+                              ? (String? value) {
                                   setSharedPref('astAnime', value);
                                   setState(() {
-                                    astAnime = value;
+                                    astAnime = value!;
                                   });
                                   widget.callback('astAnime', astAnime);
                                 }
@@ -169,7 +169,7 @@ class _SettingDialogState extends State<SettingDialog> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                    child: FlatButton(
+                    child: MaterialButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onPressed: () {

@@ -10,7 +10,7 @@ class TrackingInput extends StatefulWidget {
 }
 
 class _TrackingInputState extends State<TrackingInput> {
-  AnimationControls _flareController;
+  late AnimationControls _flareController;
   final FlareControls plusMoonControl = FlareControls();
 
   int currentMoonPhase = 0;
@@ -50,12 +50,12 @@ class _TrackingInputState extends State<TrackingInput> {
                 artboard: "Artboard"),
             Column(
               children: <Widget>[
-                FlatButton.icon(
+                TextButton.icon(
                   icon: Icon(Icons.add),
                   label: Text('Add'),
                   onPressed: _incrementMoon,
                 ),
-                FlatButton.icon(
+                TextButton.icon(
                   icon: Icon(Icons.add),
                   label: Text('reset'),
                   onPressed: _resetMoon,
