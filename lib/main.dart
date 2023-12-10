@@ -10,6 +10,10 @@ import 'package:how_is_moon/settingsDialog.dart';
 import 'package:intl/intl.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
+import 'package:starsview/config/MeteoriteConfig.dart';
+import 'package:starsview/config/StarsConfig.dart';
+import 'package:starsview/starsview.dart';
 
 void main() => runApp(MyApp());
 
@@ -51,16 +55,11 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _flareController = AnimationControls();
-    int moonDay = Moon().calculateMoonPhase(
-        DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    int moonDay = Moon().calculateMoonPhase(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     _incrementMoon(moonDay);
     getSharedPref();
 
-    _flutterController = AnimationController(
-        vsync: this,
-        duration: Duration(milliseconds: 80),
-        lowerBound: 0.0,
-        upperBound: 0.1)
+    _flutterController = AnimationController(vsync: this, duration: Duration(milliseconds: 80), lowerBound: 0.0, upperBound: 0.1)
       ..addListener(() {
         setState(() {});
       });
@@ -73,20 +72,14 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
   }
 
   Future<Null> _selectDate(BuildContext context) async {
-    newDate = (await showDatePicker(
-        context: context,
-        initialDate: _date,
-        firstDate: new DateTime(1970, 1, 7),
-        lastDate: new DateTime(2200)))!;
+    newDate = (await showDatePicker(context: context, initialDate: _date, firstDate: new DateTime(1970, 1, 7), lastDate: new DateTime(2200)))!;
 
     if (newDate != null && newDate != _date) {
-      int moonDay =
-          Moon().calculateMoonPhase(newDate.year, newDate.month, newDate.day);
+      int moonDay = Moon().calculateMoonPhase(newDate.year, newDate.month, newDate.day);
       setState(() {
         _date = newDate;
         // set pick date button text
-        if (DateFormat('yyyy-MM-dd').format(newDate) ==
-            DateFormat('yyyy-MM-dd').format(DateTime.now()))
+        if (DateFormat('yyyy-MM-dd').format(newDate) == DateFormat('yyyy-MM-dd').format(DateTime.now()))
           brNav = "Today's Moon";
         else
           brNav = new DateFormat('yyyy-MM-dd').format(newDate).toString();
@@ -162,11 +155,8 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
                       onTapUp: _onTapUp,
                       child: Transform.scale(
                         scale: _scale,
-                        child: FlareActor("assets/Moon.flr",
-                            controller: _flareController,
-                            fit: BoxFit.contain,
-                            animation: 'idle',
-                            artboard: "Artboard"),
+                        child:
+                            FlareActor("assets/Moon.flr", controller: _flareController, fit: BoxFit.contain, animation: 'idle', artboard: "Artboard"),
                       ),
                     ),
                     showAst ? Astronaut(astAnime) : Container(),
@@ -194,6 +184,13 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
                             : Container(),
                       ),
                     ),
+                    const StarsView(
+                      fps: 120,
+                      meteoriteConfig: MeteoriteConfig(minMeteoriteSpeed: .9, maxMeteoriteSpeed: 11),
+                      starsConfig: StarsConfig(
+                        starCount: 250,
+                      ),
+                    ),
                   ],
                   // overflow: Overflow.visible,
                 ),
@@ -208,8 +205,7 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
       floatingActionButton: FloatingActionButton(
         heroTag: 'earthIcon',
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => EarthPage(diff)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => EarthPage(diff)));
         },
         backgroundColor: Color.fromRGBO(5, 40, 62, 1.0),
         child: new Image.asset('assets/earth.png'),
