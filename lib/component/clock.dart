@@ -9,7 +9,7 @@ class Clock extends StatefulWidget {
 }
 
 class _ClockState extends State<Clock> {
-  String currTime = "How's Moon?";
+  String currTime = "¿Hoy la Luna?..";
   String currDate = "";
   var timer;
 
@@ -43,11 +43,11 @@ class _ClockState extends State<Clock> {
         children: <Widget>[
           new Text(
             currTime,
-            style: TextStyle(fontWeight: FontWeight.w200, fontSize: 50),
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 35, color:Colors.yellow,height: 3 ),
           ),
           new Text(
             currDate,
-            style: TextStyle(fontWeight: FontWeight.w200, fontSize: 20),
+            style: TextStyle(fontWeight: FontWeight.w300, fontSize: 24),
           ),
         ],
       ),

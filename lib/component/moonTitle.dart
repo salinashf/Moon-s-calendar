@@ -7,18 +7,18 @@ class MoonTitle extends StatelessWidget {
 
   final List months = [
     "",
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec"
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre"
   ];
 
   @override
@@ -34,32 +34,32 @@ class MoonTitle extends StatelessWidget {
         children: <Widget>[
           Positioned(
             top: width > height ? 18 : 70,
-            left: 30,
+            left: 0,
             child: Text(
               DateFormat('yyyy-MM-dd').format(newDate) ==
                       DateFormat('yyyy-MM-dd').format(DateTime.now())
-                  ? ""
+                  ? "....//"
                   : newDate.year.toString(),
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color:Colors.red,height: 2),
             ),
           ),
           Positioned(
             top: width > height ? 28 : 80,
-            left: 30,
+            left: 20,
             child: Text(
               DateFormat('yyyy-MM-dd').format(newDate) ==
                       DateFormat('yyyy-MM-dd').format(DateTime.now())
-                  ? "Today's"
+                  ? "Hoy..."
                   : "${months[newDate.month]} ${newDate.day.toString()}",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 48),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25, color:Colors.yellow,height: 3),
             ),
           ),
           Positioned(
             top: width > height ? 73 : 125,
-            left: 120,
+            left: 60,
             child: Text(
-              "Moon",
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 40),
+              "Luna",
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 30, color:Colors.red,height: 2 ),
             ),
           ),
         ],

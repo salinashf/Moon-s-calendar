@@ -35,7 +35,7 @@ class MainPage extends StatefulWidget {
 
 class _State extends State<MainPage> with SingleTickerProviderStateMixin {
   DateTime _date = new DateTime.now();
-  String brNav = "Today's Moon";
+  String brNav = "La Luna de hoy..";
 
   late AnimationControls _flareController;
   late AnimationController _flutterController;
@@ -74,13 +74,13 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
   Future<Null> _selectDate(BuildContext context) async {
     newDate = (await showDatePicker(context: context, initialDate: _date, firstDate: new DateTime(1970, 1, 7), lastDate: new DateTime(2200)))!;
 
-    if (newDate != null && newDate != _date) {
+    if (newDate != _date) {
       int moonDay = Moon().calculateMoonPhase(newDate.year, newDate.month, newDate.day);
       setState(() {
         _date = newDate;
         // set pick date button text
         if (DateFormat('yyyy-MM-dd').format(newDate) == DateFormat('yyyy-MM-dd').format(DateTime.now()))
-          brNav = "Today's Moon";
+          brNav = "La Luna de hoy";
         else
           brNav = new DateFormat('yyyy-MM-dd').format(newDate).toString();
         _incrementMoon(moonDay);
@@ -156,7 +156,7 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
                       child: Transform.scale(
                         scale: _scale,
                         child:
-                            FlareActor("assets/Moon.flr", controller: _flareController, fit: BoxFit.contain, animation: 'idle', artboard: "Artboard"),
+                        FlareActor("assets/Moon.flr", controller: _flareController, fit: BoxFit.contain, animation: 'idle', artboard: "Artboard"),
                       ),
                     ),
                     showAst ? Astronaut(astAnime) : Container(),
@@ -173,14 +173,14 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
                         },
                         child: showSat
                             ? Container(
-                                height: 150,
-                                width: 120,
-                                child: FlareActor(
-                                  'assets/Satellite.flr',
-                                  fit: BoxFit.contain,
-                                  animation: tapSat ? 'touch' : 'idle',
-                                ),
-                              )
+                          height: 150,
+                          width: 120,
+                          child: FlareActor(
+                            'assets/Satellite.flr',
+                            fit: BoxFit.contain,
+                            animation: tapSat ? 'touch' : 'idle',
+                          ),
+                        )
                             : Container(),
                       ),
                     ),
@@ -198,7 +198,7 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
             ),
             Container(
               height: 40,
-            ),
+            )
           ],
         ),
       ),
@@ -221,7 +221,7 @@ class _State extends State<MainPage> with SingleTickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             TextButton(
-              child: new Text("How's Moon in: "),
+              child: new Text("Cómo está Luna en: "),
               onPressed: () {
                 showDialog(
                   context: context,
